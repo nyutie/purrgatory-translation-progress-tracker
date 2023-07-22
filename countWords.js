@@ -26,15 +26,6 @@ class WordCounter {
     };
   }
 
-  // Function to fetch Google Sheets data using the export link
-  fetchSheetsData(sheetsID) {
-    const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetsID}/export?format=xlsx`;
-
-    return fetch(exportUrl)
-      .then((response) => response.arrayBuffer())
-      .then((data) => new Uint8Array(data));
-  }
-
   // Main function to count words and update the UI
   countWords() {
     const sheetsLink = document.getElementById('sheetsLink').value;
