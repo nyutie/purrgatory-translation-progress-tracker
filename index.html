@@ -2,17 +2,18 @@
 <html>
 <head>
   <title>Google Sheets Word Count</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
   <div class="container">
     <label for="sheetsLink">Enter Google Sheets link:</label>
     <input type="text" id="sheetsLink" />
-    <button onclick="wordCounter.countWords()">Count Words</button>
+    <button onclick="main.wordCounter.countWords()">Count Words</button>
     <div id="output"></div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-  <script src="countWords.js"></script>
+  <script type="module" src="scripts/script-main.js"></script>
+  <script type="module" src="scripts/script-countWords.js" ></script>
 </body>
 </html>

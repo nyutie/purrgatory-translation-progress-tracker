@@ -32,7 +32,7 @@ class WordCounter {
     const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
 
     // Run the countWords function in the separate Web Worker thread
-    const countWordsWorker = new Worker('countWordsWorker.js');
+    const countWordsWorker = new Worker('scripts/script-countWordsWorker.js');
     countWordsWorker.onmessage = (event) => {
       const wordCounts = event.data;
 
@@ -78,5 +78,4 @@ class WordCounter {
   }
 }
 
-// Create a WordCounter instance and use it to count words
-const wordCounter = new WordCounter();
+export default WordCounter;
