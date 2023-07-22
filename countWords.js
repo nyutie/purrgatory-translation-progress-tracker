@@ -26,27 +26,6 @@ class WordCounter {
     };
   }
 
-  // Function to count words in a string
-  countWordsInString(text) {
-    return text.trim().split(/\s+/).filter((word) => word !== '').length;
-  }
-
-  // Function to count words in each sheet of Google Sheets
-  countWordsInSheets(sheetsData) {
-    const wordCounts = {};
-
-    Object.keys(sheetsData).forEach((cellReference) => {
-      const sheetName = cellReference.replace(/[^A-Za-z]/g, ''); // Extract sheet name from cell reference
-      const cellValue = sheetsData[cellReference].v;
-
-      if (cellValue) {
-        wordCounts[sheetName] = (wordCounts[sheetName] || 0) + this.countWordsInString(cellValue);
-      }
-    });
-
-    return wordCounts;
-  }
-
   // Function to fetch Google Sheets data using the export link
   fetchSheetsData(sheetsID) {
     const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetsID}/export?format=xlsx`;
