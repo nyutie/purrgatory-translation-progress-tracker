@@ -1,4 +1,4 @@
-import WordCounter from "/scripts/script-countWords.js";
+import WordCounter from "./script-countWords.js";
 
 class Main {
   constructor() {
