@@ -100,3 +100,19 @@ button:active {
 .note-content {
   font-size: 16px;
 }
+
+.github-logo {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.075;
+  cursor: pointer;
+  transition: opacity 0.1s;
+  border-radius: 50%;
+  margin: 15px;
+  height: 50px;
+}
+
+.github-logo:hover {
+  opacity: 0.2;
+}
