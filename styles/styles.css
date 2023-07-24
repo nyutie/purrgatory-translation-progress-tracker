@@ -16,11 +16,30 @@ label {
 input {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 16px;
+  background-color: white;
+  border: 1px solid #808080;
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+
+input:focus {
+  outline: 2px solid rgba(0, 0, 0, 0);
+  border-color: #000;
 }
 
 button {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 16px;
+  color: #808080;
+  padding: 2px 5px;
+  background-color: white;
+  border: 1px solid #808080;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+button:active {
+  border-color: #000;
 }
 
 .web-content {
