@@ -42,6 +42,10 @@ button:active {
   border-color: #000;
 }
 
+a {
+  color: #808080;
+}
+
 .web-content {
   position: absolute;
   left: 0;
