@@ -1,5 +1,26 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 20px;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-rendering: grayscale;
+  image-rendering: pixelated;
+}
+
+label {
+  user-select: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+}
+
+button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
 }
 
 .bigger-container {
@@ -16,16 +37,24 @@ body {
 
 .container {
   margin: 20px;
+  min-width: 300px;
   max-width: 400px;
   padding: 20px;
   border: 1px solid #ccc;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
+.input-holder {
+  width: 100%;
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-button {
-  margin-top: 10px;
+.input-holder input {
+  flex-grow: 1;
+}
+
+.output {
+  font-size: 16px;
 }

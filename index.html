@@ -3,7 +3,6 @@
 <head>
   <title>purrgatory translation helper</title>
   <link rel="stylesheet" href="styles/styles.css">
-
   <link rel="icon" type="image/png" href="images/pth.png">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,22 +14,30 @@
   <meta property="og:image:width" content="125">
   <meta property="og:image:height" content="125">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap" rel="stylesheet">
+
   <meta http-equiv="Content-Security-Policy" content="worker-src 'self'">
 </head>
 <body>
   <div class="bigger-container">
     <div class="container">
       <label for="sheetsLink">cells translated:</label>
-      <input type="text" id="sheetsLinkCell" />
-      <button onclick="main.cellTracker.getProgress()">get progress</button>
-      <div id="outputCell"></div>
+      <div class="input-holder">
+        <input type="text" id="sheetsLinkCell" />
+        <button onclick="main.cellTracker.getProgress()">get progress</button>
+      </div>
+      <div id="outputCell" class="output"></div>
     </div>
 
     <div class="container">
       <label for="sheetsLink">word count:</label>
-      <input type="text" id="sheetsLink" />
-      <button onclick="main.wordCounter.countWords()">count words</button>
-      <div id="outputWords"></div>
+      <div class="input-holder">
+        <input type="text" id="sheetsLink" />
+        <button onclick="main.wordCounter.countWords()">count words</button>
+      </div>
+      <div id="outputWords" class="output"></div>
     </div>
   </div>
 
