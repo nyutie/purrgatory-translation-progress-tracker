@@ -4,7 +4,6 @@ body {
 
 .container {
   max-width: 400px;
-  margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
 }
@@ -18,6 +17,16 @@ button {
   margin-top: 10px;
 }
 
-#output {
-  margin-top: 20px;
+.bigger-container {
+  overflow-y: scroll;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
 }

@@ -1,10 +1,11 @@
 import WordCounter from "./script-countWords.js";
+import CellTracker from "./script-cellTracker.js";
 
 class Main {
   constructor() {
     this.wordCounter = new WordCounter();
+    this.cellTracker = new CellTracker();
   }
 }
 
-// Create a SheetDataAnalyzer instance
 window.main = new Main();

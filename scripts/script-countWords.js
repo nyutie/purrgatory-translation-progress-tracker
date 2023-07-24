@@ -28,6 +28,9 @@ class WordCounter {
 
   // Main function to count words and update the UI
   countWords() {
+    const outputDiv = document.getElementById('outputWords');
+    outputDiv.innerHTML = '<br>Downloading sheet...';
+
     const sheetsLink = document.getElementById('sheetsLink').value;
     const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
 
@@ -37,22 +40,20 @@ class WordCounter {
       const wordCounts = event.data;
 
       if (wordCounts.error) {
-        document.getElementById('output').innerHTML = wordCounts.error;
+        outputDiv.innerHTML = "<br>" + wordCounts.error;
         return;
       }
 
       // Display the word counts in the UI
-      const outputDiv = document.getElementById('output');
       outputDiv.innerHTML = '';
 
-      const unknownSheets = ['examplesheet', 'examplesheet2'];
       const unknownWordCounts = {};
 
       // Subtract known sheets and accumulate unknown sheets
       for (const sheetName in wordCounts) {
         if (this.originalWordCounts.hasOwnProperty(sheetName)) {
           const diff = wordCounts[sheetName] - this.originalWordCounts[sheetName];
-          outputDiv.innerHTML += `Word count in '${sheetName}': ${diff}<br>`;
+          outputDiv.innerHTML += `<br>Word count in '${sheetName}': ${diff}`;
         } else {
           unknownWordCounts[sheetName] = wordCounts[sheetName];
         }
@@ -70,7 +71,7 @@ class WordCounter {
 
       // Calculate the total word count
       const totalWordCount = Object.values(wordCounts).reduce((acc, count) => acc + count, 0);
-      outputDiv.innerHTML += `Total word count: ${totalWordCount - this.originalWordCounts.total}`;
+      outputDiv.innerHTML += `<br>Total word count: ${totalWordCount - this.originalWordCounts.total}`;
     };
 
     // Send message to the worker to start processing

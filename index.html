@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Google Sheets Word Count</title>
+  <title>purrgatory translation helper</title>
   <link rel="stylesheet" href="styles/styles.css">
   <meta http-equiv="Content-Security-Policy" content="worker-src 'self'">
 </head>
 <body>
-  <div class="container">
-    <label for="sheetsLink">Enter Google Sheets link:</label>
-    <input type="text" id="sheetsLink" />
-    <button onclick="main.wordCounter.countWords()">Count Words</button>
-    <div id="output"></div>
+  <div class="bigger-container">
+    <div class="container">
+      <label for="sheetsLink">cells translated:</label>
+      <input type="text" id="sheetsLinkCell" />
+      <button onclick="main.cellTracker.getProgress()">get progress</button>
+      <div id="outputCell"></div>
+    </div>
+
+    <div class="container">
+      <label for="sheetsLink">word count:</label>
+      <input type="text" id="sheetsLink" />
+      <button onclick="main.wordCounter.countWords()">count words</button>
+      <div id="outputWords"></div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
   <script type="module" src="scripts/script-main.js"></script>
   <script type="module" src="scripts/script-countWords.js" ></script>
+  <script type="module" src="scripts/script-cellTracker.js" ></script>
 </body>
 </html>
