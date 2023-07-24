@@ -29,7 +29,7 @@ class WordCounter {
   // Main function to count words and update the UI
   countWords() {
     const outputDiv = document.getElementById('outputWords');
-    outputDiv.innerHTML = 'Downloading sheet...';
+    outputDiv.innerHTML = 'downloading sheet...';
 
     const sheetsLink = document.getElementById('sheetsLink').value;
     const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
@@ -53,7 +53,7 @@ class WordCounter {
       for (const sheetName in wordCounts) {
         if (this.originalWordCounts.hasOwnProperty(sheetName)) {
           const diff = wordCounts[sheetName] - this.originalWordCounts[sheetName];
-          outputDiv.innerHTML += `Word count in '${sheetName}': ${diff}<br>`;
+          outputDiv.innerHTML += `word count in '${sheetName}': ${diff}<br>`;
         } else {
           unknownWordCounts[sheetName] = wordCounts[sheetName];
         }
@@ -61,12 +61,12 @@ class WordCounter {
 
       // Display unknown sheets separately
       if (Object.keys(unknownWordCounts).length > 0) {
-        outputDiv.innerHTML += `<br>Unknown sheets: `;
+        outputDiv.innerHTML += `<br><br>unknown sheets: `;
         Object.keys(unknownWordCounts).forEach((sheetName) => {
           outputDiv.innerHTML += `'${sheetName}', `;
         });
         outputDiv.innerHTML = outputDiv.innerHTML.slice(0, -2); // Remove the trailing comma and space
-        outputDiv.innerHTML += `<br>`;
+        outputDiv.innerHTML += `<br><br>`;
       }
 
       // Calculate the total word count

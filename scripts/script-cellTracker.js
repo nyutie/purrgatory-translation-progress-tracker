@@ -7,7 +7,7 @@ class CellTracker {
     this.cellCounterWorker = new Worker('scripts/script-cellTrackerWorker.js');
 
     const outputDiv = document.getElementById('outputCell');
-    outputDiv.innerHTML = 'Downloading sheet...';
+    outputDiv.innerHTML = 'downloading sheet...';
 
     const sheetsLink = document.getElementById('sheetsLinkCell').value;
     const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
@@ -27,19 +27,19 @@ class CellTracker {
       // Display each sheet's progress
       for (const sheetName in progressData.sheetsProgress) {
         const sheetProgress = progressData.sheetsProgress[sheetName];
-        outputDiv.innerHTML += `Cells translated in '${sheetName}': ${sheetProgress}<br>`;
+        outputDiv.innerHTML += `cells translated in '${sheetName}': ${sheetProgress}<br>`;
       }
 
       if (progressData.unknownSheets.length > 0) {
-        outputDiv.innerHTML += `<br>Unknown sheets: `;
+        outputDiv.innerHTML += `<br><br>unknown sheets: `;
         progressData.unknownSheets.forEach((sheetName) => {
           outputDiv.innerHTML += `'${sheetName}', `;
         })
         outputDiv.innerHTML = outputDiv.innerHTML.slice(0, -2); // Remove the trailing comma and space
-        outputDiv.innerHTML += `<br>`;
+        outputDiv.innerHTML += `<br><br>`;
       }
 
-      outputDiv.innerHTML += `<br>Total progress: ${progressData.totalProgress.toFixed(2)}%`;
+      outputDiv.innerHTML += `<br>total progress: ${progressData.totalProgress.toFixed(2)}%`;
     };
 
     // Send message to the worker to start processing

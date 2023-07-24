@@ -61,7 +61,7 @@ class WordCounterWorker {
       .catch((error) => {
         console.error('Error fetching Google Sheets data:', error);
         // Send an error message back to the main thread
-        self.postMessage({ error: 'Error fetching Google Sheets data. Please check the link and try again.' });
+        self.postMessage({ error: 'error fetching google sheets data. please check the link and try again.' });
       });
   }
 }
