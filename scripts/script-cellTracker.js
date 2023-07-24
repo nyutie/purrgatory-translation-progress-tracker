@@ -7,7 +7,7 @@ class CellTracker {
     this.cellCounterWorker = new Worker('scripts/script-cellTrackerWorker.js');
 
     const outputDiv = document.getElementById('outputCell');
-    outputDiv.innerHTML = '<br>Downloading sheet...';
+    outputDiv.innerHTML = 'Downloading sheet...';
 
     const sheetsLink = document.getElementById('sheetsLinkCell').value;
     const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
@@ -27,7 +27,7 @@ class CellTracker {
       // Display each sheet's progress
       for (const sheetName in progressData.sheetsProgress) {
         const sheetProgress = progressData.sheetsProgress[sheetName];
-        outputDiv.innerHTML += `<br> Cells translated in '${sheetName}': ${sheetProgress}`;
+        outputDiv.innerHTML += `Cells translated in '${sheetName}': ${sheetProgress}<br>`;
       }
 
       if (progressData.unknownSheets.length > 0) {
