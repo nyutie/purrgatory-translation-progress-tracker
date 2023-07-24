@@ -21,10 +21,6 @@ class CellTracker {
         return;
       }
 
-      console.log("========");
-      console.log(progressData);
-      console.log("========");
-
       // Clear the output div
       outputDiv.innerHTML = '';
 

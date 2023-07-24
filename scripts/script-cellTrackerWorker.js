@@ -38,8 +38,7 @@ class CellTrackerWorker {
   // Function to fetch Google Sheets data using the export link
   fetchSheetsData(sheetsID) {
     const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetsID}/export?format=xlsx`;
-    console.log(exportUrl)
-
+    
     return fetch(exportUrl)
       .then((response) => response.arrayBuffer())
       .then((data) => new Uint8Array(data));
