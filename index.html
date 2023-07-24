@@ -21,23 +21,37 @@
   <meta http-equiv="Content-Security-Policy" content="worker-src 'self'">
 </head>
 <body>
-  <div class="bigger-container">
-    <div class="container">
-      <label for="sheetsLink">cells translated:</label>
-      <div class="input-holder">
-        <input type="text" id="sheetsLinkCell" />
-        <button onclick="main.cellTracker.getProgress()">get progress</button>
+  <div class="web-content">
+    <div class="tools">
+
+      <div class="container">
+        <label for="sheetsLink">cells translated:</label>
+        <div class="input-holder">
+          <input type="text" id="sheetsLinkCell" />
+          <button onclick="main.cellTracker.getProgress()">get progress</button>
+        </div>
+        <div id="outputCell" class="output"></div>
       </div>
-      <div id="outputCell" class="output"></div>
+
+      <div class="container">
+        <label for="sheetsLink">word count:</label>
+        <div class="input-holder">
+          <input type="text" id="sheetsLink" />
+          <button onclick="main.wordCounter.countWords()">count words</button>
+        </div>
+        <div id="outputWords" class="output"></div>
+      </div>
+
     </div>
 
-    <div class="container">
-      <label for="sheetsLink">word count:</label>
-      <div class="input-holder">
-        <input type="text" id="sheetsLink" />
-        <button onclick="main.wordCounter.countWords()">count words</button>
+    <div class="note">
+      <label for="sheetsLink">note:</label>
+      <div class="note-content">
+        the translation progress tool only checks whether the cell is not empty! it does not care about anything else. if you wanna take notes right click on a cell and press "comment"!
+        <br>
+        <br>
+        meow meow :3
       </div>
-      <div id="outputWords" class="output"></div>
     </div>
   </div>
 

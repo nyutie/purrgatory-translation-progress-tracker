@@ -23,8 +23,19 @@ button {
   font-size: 16px;
 }
 
-.bigger-container {
+.web-content {
   position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  flex-wrap: wrap;
+}
+
+.tools {
   left: 0;
   top: 0;
   width: 100%;
@@ -56,5 +67,16 @@ button {
 }
 
 .output {
+  font-size: 16px;
+}
+
+.note {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  max-width: 500px;
+}
+
+.note-content {
   font-size: 16px;
 }
