@@ -1,3 +1,21 @@
+/* * { border: 1px solid red !important; } */
+
+*:disabled {
+  cursor: auto;
+  background-color: #e0e0e0;
+  pointer-events: none;
+  user-select: none;
+}
+.disabled {
+  cursor: auto;
+  background-color: #e0e0e0;
+  pointer-events: none;
+}
+.disabled * {
+  cursor: auto;
+  background-color: #e0e0e0;
+}
+
 body {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 20px;
@@ -36,6 +54,7 @@ button {
   border: 1px solid #808080;
   border-radius: 2px;
   cursor: pointer;
+  user-select: none;
 }
 
 button:active {
@@ -58,6 +77,67 @@ a {
   flex-wrap: wrap;
 }
 
+.column-down {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: 16px;
+  padding: 16px;
+  border: 1px solid #ccc;
+}
+
+.inputs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.inputs > button, input {
+  width: 200px;
+}
+
+.upload-button-group {
+  width: 200px;
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-right: 10px; /* offets a weird shift to the right */
+}
+
+.upload-button {
+  flex-grow: 1;
+}
+
+.upload-clear-button {
+  height: 28px;
+  aspect-ratio: 1/1;
+}
+
+.divider {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.smaller-text {
+  font-size: 16px;
+}
+
+.process-sheets {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 .tools {
   left: 0;
   top: 0;
@@ -69,12 +149,8 @@ a {
   flex-wrap: wrap;
 }
 
-.container {
-  margin: 20px;
-  min-width: 300px;
-  max-width: 400px;
-  padding: 20px;
-  border: 1px solid #ccc;
+.tools * {
+  flex-grow: 1;
 }
 
 .input-holder {
@@ -94,29 +170,10 @@ a {
   font-size: 16px;
 }
 
-.note {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  max-width: 500px;
+.notes {
+  max-width: 750px;
 }
 
-.note-content {
-  font-size: 16px;
-}
-
-.github-logo {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  opacity: 0.075;
-  cursor: pointer;
-  transition: opacity 0.1s;
-  border-radius: 50%;
-  margin: 15px;
-  height: 50px;
-}
-
-.github-logo:hover {
-  opacity: 0.2;
+.hidden {
+  display: none;
 }

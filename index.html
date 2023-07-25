@@ -22,39 +22,54 @@
 </head>
 <body>
   <div class="web-content">
-    <div class="tools">
-
+    <div class="column-down">
       <div class="container">
-        <label for="sheetsLink">cells translated:</label>
-        <div class="input-holder">
-          <input type="text" id="sheetsLinkCell" placeholder="google sheets link" />
-          <button onclick="main.cellTracker.getProgress()">get progress</button>
+        <label>input</label>
+        <div class="inputs">
+          <input id="link-input" type="text" placeholder="google sheets link" />
+          <div>or</div>
+          <div class="grow upload-button-group">
+            <input id="file-upload-input" type="file" accept=".xls,.xlsx" style="display: none" />
+            <button class="upload-button" onclick="document.getElementById('file-upload-input').click()">file upload</button>
+            <button class="upload-clear-button" onclick="main.ui.clearFile()">×</button>
+          </div>
         </div>
-        <div id="outputCell" class="output"></div>
-      </div>
-
-      <div class="container">
-        <label for="sheetsLink">word count:</label>
-        <div class="input-holder">
-          <input type="text" id="sheetsLink" placeholder="google sheets link" />
-          <button onclick="main.wordCounter.countWords()">count words</button>
+        <div class="divider"></div>
+        <div class="process-sheets">
+          <div id="sheet-ready" class="smaller-text hidden">test</div>
+          <button id="process-sheet-button" onclick="main.ui.sendSheetToMain()" disabled>process sheet</button>
         </div>
-        <div id="outputWords" class="output"></div>
       </div>
-
-    </div>
-
-    <div class="note">
-      <label for="sheetsLink">note:</label>
-      <div class="note-content">
-        the translation progress tool only checks whether the cell is not empty!
-        <br>
-        it does not care about anything else. if you wanna take notes right click on a cell and press "comment"!
-        <br>
-        <br>
-        made by nyutie - on
-        <a href="https://github.com/nyutie/purrgatory-translation-progress-tracker" target="_blank" rel="noopener">github</a>
-        - meow meow :3
+  
+      <div class="tools">
+        <div class="container">
+          <label for="cellsOutput">cells translated:</label>
+          <div id="outputCell" class="output"></div>
+        </div>
+  
+        <div class="container">
+          <label for="wordsOutput">word count:</label>
+          <div id="outputWords" class="output"></div>
+        </div>
+  
+      </div>
+      
+  
+      <div class="container notes">
+        <label for="note">notes:</label>
+        <div class="smaller-text">
+          if you use a google sheets link it has to be set to public! top right, click share and set general access to anyone with the link as a viewer.
+          <br>
+          <br>
+          the translation progress tool only checks whether the cell is not empty!
+          <br>
+          it does not care about anything else. if you wanna take notes right click on a cell and press "comment"!
+          <br>
+          <br>
+          made by nyutie - on
+          <a href="https://github.com/nyutie/purrgatory-translation-progress-tracker" target="_blank" rel="noopener">github</a>
+          - meow meow :3
+        </div>
       </div>
     </div>
   </div>

@@ -4,8 +4,18 @@ class WordCounterWorker {
   constructor() {
     // Listen for messages from the main thread
     self.onmessage = (event) => {
-      const sheetsID = event.data;
-      this.countWordsInSheetsAndSendResult(sheetsID);
+      const sheetInput = event.data;
+      if (sheetInput.type === 'googlesheets') {
+        console.log(sheetInput);
+        this.countWordsInSheetsAndSendResult(sheetInput.content);
+      }
+      else if (sheetInput.type === 'file') {
+        console.log(sheetInput);
+        this.countWordsInSheetsAndSendResult(sheetInput.content);
+      } else {
+        console.log(sheetInput)
+        self.postMessage({ error: 'invalid sheetInput type?? something went very wrong...' });
+      }
     };
   }
 
@@ -30,39 +40,22 @@ class WordCounterWorker {
     return wordCounts;
   }
 
-  // Function to fetch Google Sheets data using the export link
-  fetchSheetsData(sheetsID) {
-    const exportUrl = `https://docs.google.com/spreadsheets/d/${sheetsID}/export?format=xlsx`;
-
-    return fetch(exportUrl)
-      .then((response) => response.arrayBuffer())
-      .then((data) => new Uint8Array(data));
-  }
-
   // Function to count words and send the result back to the main thread
-  countWordsInSheetsAndSendResult(sheetsID) {
-    this.fetchSheetsData(sheetsID)
-      .then((data) => {
-        const workbook = XLSX.read(data, { type: 'array' });
+  countWordsInSheetsAndSendResult(sheetUint8Data) {
+    const workbook = XLSX.read(sheetUint8Data, { type: 'array' });
 
-        const wordCounts = {};
+    const wordCounts = {};
 
-        workbook.SheetNames.forEach((sheetName) => {
-          const sheetsData = workbook.Sheets[sheetName];
-          const sheetWordCounts = this.countWordsInSheets(sheetsData);
+    workbook.SheetNames.forEach((sheetName) => {
+      const sheetsData = workbook.Sheets[sheetName];
+      const sheetWordCounts = this.countWordsInSheets(sheetsData);
 
-          // Sum up word counts for each sheet
-          wordCounts[sheetName] = Object.values(sheetWordCounts).reduce((acc, count) => acc + count, 0);
-        });
+      // Sum up word counts for each sheet
+      wordCounts[sheetName] = Object.values(sheetWordCounts).reduce((acc, count) => acc + count, 0);
+    });
 
-        // Post the word counts back to the main thread
-        self.postMessage(wordCounts);
-      })
-      .catch((error) => {
-        console.error('Error fetching Google Sheets data:', error);
-        // Send an error message back to the main thread
-        self.postMessage({ error: 'error fetching google sheets data. please check the link and try again.' });
-      });
+    // Post the word counts back to the main thread
+    self.postMessage(wordCounts);
   }
 }
 

@@ -4,8 +4,18 @@ class CellTrackerWorker {
   constructor() {
     // Listen for messages from the main thread
     self.onmessage = (event) => {
-      const sheetsID = event.data;
-      this.trackCellsAndSendProgress(sheetsID);
+      const sheetInput = event.data;
+      if (sheetInput.type === 'googlesheets') {
+        console.log(sheetInput);
+        this.trackCellsAndSendProgress(sheetInput.content);
+      }
+      else if (sheetInput.type === 'file') {
+        console.log(sheetInput);
+        this.trackCellsAndSendProgress(sheetInput.content);
+      } else {
+        console.log(sheetInput)
+        self.postMessage({ error: 'invalid sheetInput type?? something went very wrong...' });
+      }
     };
 
     this.columnsDEandJK = [
@@ -66,84 +76,76 @@ class CellTrackerWorker {
   }
 
   // Function to track cells and calculate progress
-  trackCellsAndSendProgress(sheetsID) {
-    this.fetchSheetsData(sheetsID)
-      .then((data) => {
-        const workbook = XLSX.read(data, { type: 'array' });
+  trackCellsAndSendProgress(sheetUint8Data) {
+    const workbook = XLSX.read(sheetUint8Data, { type: 'array' });
 
-        let totalOriginalCount = 0;
-        let totalTranslatedCount = 0;
-        const unknownSheets = [];
+    let totalOriginalCount = 0;
+    let totalTranslatedCount = 0;
+    const unknownSheets = [];
 
-        let sheetsProgress = {}; // stores string of 'translatedCells/originalCells' per sheet to be displayed
+    let sheetsProgress = {}; // stores string of 'translatedCells/originalCells' per sheet to be displayed
 
-        workbook.SheetNames.forEach((sheetName) => {
-          const columnsToCheck = this.getColumnsForSheet(sheetName);
+    workbook.SheetNames.forEach((sheetName) => {
+      const columnsToCheck = this.getColumnsForSheet(sheetName);
 
-          if (columnsToCheck) {
-            const sheetsData = workbook.Sheets[sheetName];
-            let originalCells = 0;
-            let translatedCells = 0;
+      if (columnsToCheck) {
+        const sheetsData = workbook.Sheets[sheetName];
+        let originalCells = 0;
+        let translatedCells = 0;
 
-            // Loop through the cells in the specified columns and check if they are to be counted
-            for (const [columnToBeTranslated, translatedColumn] of columnsToCheck) {
+        // Loop through the cells in the specified columns and check if they are to be counted
+        for (const [columnToBeTranslated, translatedColumn] of columnsToCheck) {
 
-              let isFirstCell = true;
+           let isFirstCell = true;
 
-              for (const cellReference in sheetsData) {
-                if (cellReference[0] === columnToBeTranslated) {
-                  // ignore first cell in column:
-                  if (isFirstCell) {
-                    isFirstCell = false;
-                    continue;
-                  }
+           for (const cellReference in sheetsData) {
+            if (cellReference[0] === columnToBeTranslated) {
+              // ignore first cell in column:
+              if (isFirstCell) {
+                isFirstCell = false;
+                continue;
+              }
 
-                  const cellValue = sheetsData[cellReference].v;
+                const cellValue = sheetsData[cellReference].v;
 
-                  if (this.isCellToBeCounted(cellValue)) {
-                    originalCells++;
-                    totalOriginalCount++;
+                if (this.isCellToBeCounted(cellValue)) {
+                  originalCells++;
+                  totalOriginalCount++;
 
-                    // Check the corresponding cell in the next column and count it as translated if it has some text
-                    if (cellReference[0] === columnToBeTranslated) {
-                      const cellReferenceNext = `${String.fromCharCode(cellReference[0].charCodeAt(0) + 1)}${cellReference.substring(1)}`;
-                      let cellValueNext;
-                      try {
-                        cellValueNext = sheetsData[cellReferenceNext].v;
-                      } catch (TypeError) {
-                        cellValueNext = '';
-                      }
+                  // Check the corresponding cell in the next column and count it as translated if it has some text
+                  if (cellReference[0] === columnToBeTranslated) {
+                    const cellReferenceNext = `${String.fromCharCode(cellReference[0].charCodeAt(0) + 1)}${cellReference.substring(1)}`;
+                    let cellValueNext;
+                    try {
+                      cellValueNext = sheetsData[cellReferenceNext].v;
+                    } catch (TypeError) {
+                      cellValueNext = '';
+                    }
 
-                      if (this.isCellTranslated(cellValueNext)) {
-                        translatedCells++;
-                        totalTranslatedCount++;
-                      }
+                    if (this.isCellTranslated(cellValueNext)) {
+                      translatedCells++;
+                      totalTranslatedCount++;
                     }
                   }
                 }
               }
             }
-
-            sheetsProgress[sheetName] = `${translatedCells}/${originalCells}`;
-          } else {
-            unknownSheets.push(sheetName);
           }
-        });
 
-        // Calculate total progress in %
-        const totalProgress = (totalTranslatedCount / totalOriginalCount) * 100;
+          sheetsProgress[sheetName] = `${translatedCells}/${originalCells}`;
+        } else {
+          unknownSheets.push(sheetName);
+        }
+      });
 
-        // Post the progress data back to the main thread
-        self.postMessage({
-          totalProgress: totalProgress,
-          sheetsProgress: sheetsProgress,
-          unknownSheets: unknownSheets,
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching Google Sheets data:', error);
-        // Send an error message back to the main thread
-        self.postMessage({ error: 'error fetching google sheets data. please check the link and try again.' });
+      // Calculate total progress in %
+      const totalProgress = (totalTranslatedCount / totalOriginalCount) * 100;
+
+      // Post the progress data back to the main thread
+      self.postMessage({
+        totalProgress: totalProgress,
+        sheetsProgress: sheetsProgress,
+        unknownSheets: unknownSheets,
       });
   }
 }

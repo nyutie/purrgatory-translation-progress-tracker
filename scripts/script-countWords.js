@@ -27,12 +27,12 @@ class WordCounter {
   }
 
   // Main function to count words and update the UI
-  countWords() {
+  countWords(sheetInput) {
     const outputDiv = document.getElementById('outputWords');
-    outputDiv.innerHTML = 'downloading sheet...';
+    outputDiv.innerHTML = 'processing sheet...';
 
-    const sheetsLink = document.getElementById('sheetsLink').value;
-    const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
+    // reset text saying downloading or converting
+    window.main.resetSheetReadyText();
 
     // Run the countWords function in the separate Web Worker thread
     const countWordsWorker = new Worker('./scripts/script-countWordsWorker.js');
@@ -75,7 +75,7 @@ class WordCounter {
     };
 
     // Send message to the worker to start processing
-    countWordsWorker.postMessage(sheetsID);
+    countWordsWorker.postMessage(sheetInput);
   }
 }
 

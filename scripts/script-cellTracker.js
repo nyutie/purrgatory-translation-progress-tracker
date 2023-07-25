@@ -3,16 +3,16 @@ class CellTracker {
 
   }
 
-  getProgress() {
-    this.cellCounterWorker = new Worker('scripts/script-cellTrackerWorker.js');
+  getProgress(sheetInput) {
 
     const outputDiv = document.getElementById('outputCell');
-    outputDiv.innerHTML = 'downloading sheet...';
+    outputDiv.innerHTML = 'processing sheet...';
 
-    const sheetsLink = document.getElementById('sheetsLinkCell').value;
-    const sheetsID = sheetsLink.match(/[-\w]{25,}/); // Extract the Google Sheets ID from the link
+    // reset text saying downloading or converting
+    window.main.resetSheetReadyText();
 
     // Run the cellCounter function in the separate Web Worker thread
+    this.cellCounterWorker = new Worker('scripts/script-cellTrackerWorker.js');
     this.cellCounterWorker.onmessage = (event) => {
       const progressData = event.data;
 
@@ -43,7 +43,7 @@ class CellTracker {
     };
 
     // Send message to the worker to start processing
-    this.cellCounterWorker.postMessage(sheetsID);
+    this.cellCounterWorker.postMessage(sheetInput);
   }
 }
 
