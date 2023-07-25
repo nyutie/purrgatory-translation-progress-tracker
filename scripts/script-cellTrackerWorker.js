@@ -95,10 +95,9 @@ class CellTrackerWorker {
 
         // Loop through the cells in the specified columns and check if they are to be counted
         for (const [columnToBeTranslated, translatedColumn] of columnsToCheck) {
+          let isFirstCell = true;
 
-           let isFirstCell = true;
-
-           for (const cellReference in sheetsData) {
+          for (const cellReference in sheetsData) {
             if (cellReference[0] === columnToBeTranslated) {
               // ignore first cell in column:
               if (isFirstCell) {
@@ -106,32 +105,31 @@ class CellTrackerWorker {
                 continue;
               }
 
-                const cellValue = sheetsData[cellReference].v;
+              const cellValue = sheetsData[cellReference].v;
 
-                if (this.isCellToBeCounted(cellValue)) {
-                  originalCells++;
-                  totalOriginalCount++;
+              if (this.isCellToBeCounted(cellValue)) {
+                originalCells++;
+                totalOriginalCount++;
 
-                  // Check the corresponding cell in the next column and count it as translated if it has some text
-                  if (cellReference[0] === columnToBeTranslated) {
-                    const cellReferenceNext = `${String.fromCharCode(cellReference[0].charCodeAt(0) + 1)}${cellReference.substring(1)}`;
-                    let cellValueNext;
-                    try {
-                      cellValueNext = sheetsData[cellReferenceNext].v;
-                    } catch (TypeError) {
-                      cellValueNext = '';
-                    }
-
-                    if (this.isCellTranslated(cellValueNext)) {
-                      translatedCells++;
-                      totalTranslatedCount++;
-                    }
+                // Check the corresponding cell in the next column and count it as translated if it has some text
+                if (cellReference[0] === columnToBeTranslated) {
+                  const cellReferenceNext = `${String.fromCharCode(cellReference[0].charCodeAt(0) + 1)}${cellReference.substring(1)}`;
+                  let cellValueNext;
+                  try {
+                    cellValueNext = sheetsData[cellReferenceNext].v;
+                  } catch (TypeError) {
+                    cellValueNext = '';
+                  }
+                  if (this.isCellTranslated(cellValueNext)) {
+                    translatedCells++;
+                    totalTranslatedCount++;
                   }
                 }
               }
             }
           }
-
+        }
+        
           sheetsProgress[sheetName] = `${translatedCells}/${originalCells}`;
         } else {
           unknownSheets.push(sheetName);
