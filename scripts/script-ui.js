@@ -17,8 +17,8 @@ class Ui {
     } else if (!enable) {
       /* it's actually fine to just set all to enabled,
       because if the user was able to click 'process sheet' 
-      the criteria for all inputs to be enabled is already met.
-      at least I hope...*/
+      the criteria for all inputs to be enabled are already met.
+      at least I hope... */
       document.getElementById('link-input').disabled = false;
       document.getElementById('upload-button').disabled = false;
       document.getElementById('upload-clear-button').disabled = false;
