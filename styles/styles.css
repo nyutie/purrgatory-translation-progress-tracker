@@ -6,15 +6,6 @@
   pointer-events: none;
   user-select: none;
 }
-.disabled {
-  cursor: auto;
-  background-color: #e0e0e0;
-  pointer-events: none;
-}
-.disabled * {
-  cursor: auto;
-  background-color: #e0e0e0;
-}
 
 body {
   font-family: 'Source Sans 3', sans-serif;
