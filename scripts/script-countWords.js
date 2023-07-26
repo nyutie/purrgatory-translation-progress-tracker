@@ -72,6 +72,9 @@ class WordCounter {
       // Calculate the total word count
       const totalWordCount = Object.values(wordCounts).reduce((acc, count) => acc + count, 0);
       outputDiv.innerHTML += `<br>Total word count: ${totalWordCount - this.originalWordCounts.total}`;
+
+      // tell main we're done
+      window.main.finishedProcessingWordCount();
     };
 
     // Send message to the worker to start processing

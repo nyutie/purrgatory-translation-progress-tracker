@@ -8,6 +8,24 @@ class Ui {
     this.timeoutId = null;
   }
   
+  blockAllInputs(enable) {
+    if (enable) {
+      document.getElementById('link-input').disabled = true;
+      document.getElementById('upload-button').disabled = true;
+      document.getElementById('upload-clear-button').disabled = true;
+      document.getElementById('process-sheet-button').disabled = true;
+    } else if (!enable) {
+      /* it's actually fine to just set all to enabled,
+      because if the user was able to click 'process sheet' 
+      the criteria for all inputs to be enabled is already met.
+      at least I hope...*/
+      document.getElementById('link-input').disabled = false;
+      document.getElementById('upload-button').disabled = false;
+      document.getElementById('upload-clear-button').disabled = false;
+      document.getElementById('process-sheet-button').disabled = false;
+    }
+  }
+
   changeProcessSheetButton(enable) {
     document.getElementById('process-sheet-button').disabled = !enable;
   }
@@ -124,8 +142,6 @@ class Ui {
   sendSheetToMain() {
     window.main.processSheet(this.selectedSheet)
   }
-
-
 }
 
 export default Ui;

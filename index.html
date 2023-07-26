@@ -27,11 +27,11 @@
         <label>input</label>
         <div class="inputs">
           <input id="link-input" type="text" placeholder="google sheets link" />
-          <div>or</div>
+          <div style="user-select: none;">or</div>
           <div class="grow upload-button-group">
             <input id="file-upload-input" type="file" accept=".xls,.xlsx" style="display: none" />
-            <button class="upload-button" onclick="document.getElementById('file-upload-input').click()">file upload</button>
-            <button class="upload-clear-button" onclick="main.ui.clearFile()">×</button>
+            <button id="upload-button" class="upload-button" onclick="document.getElementById('file-upload-input').click()">file upload</button>
+            <button id="upload-clear-button" class="upload-clear-button" onclick="main.ui.clearFile()">×</button>
           </div>
         </div>
         <div class="divider"></div>
@@ -57,7 +57,7 @@
   
       <div class="container notes">
         <label for="note">notes:</label>
-        <div class="smaller-text">
+        <div class="smaller-text" style="user-select: none;">
           if you use a google sheets link it has to be set to public! top right, click share and set general access to anyone with the link as a viewer.
           <br>
           <br>

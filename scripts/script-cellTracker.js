@@ -39,7 +39,11 @@ class CellTracker {
         outputDiv.innerHTML += `<br><br>`;
       }
 
+      // Display the total progress
       outputDiv.innerHTML += `<br>total progress: ${progressData.totalProgress.toFixed(2)}%`;
+
+      // tell main we're done
+      window.main.finishedProcessingCellProgress();
     };
 
     // Send message to the worker to start processing

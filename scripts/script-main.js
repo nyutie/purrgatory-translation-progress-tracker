@@ -11,6 +11,27 @@ class Main {
     this.cellTracker = new CellTracker();
     
     this.originalSheetReadyText = '';
+
+    this.finishedProcessing = { 'wordCount': null, 'cellProgress': null };
+  }
+
+  checkIfFinishedProcessing() {
+    if (
+      this.finishedProcessing.wordCount === true &&
+      this.finishedProcessing.cellProgress === true
+      ) {
+        this.ui.blockAllInputs(false);
+    }
+  }
+
+  finishedProcessingWordCount() {
+    this.finishedProcessing.wordCount = true;
+    this.checkIfFinishedProcessing();
+  }
+
+  finishedProcessingCellProgress() {
+    this.finishedProcessing.cellProgress = true;
+    this.checkIfFinishedProcessing();
   }
 
   resetSheetReadyText() {
@@ -27,6 +48,10 @@ class Main {
 
   processSheet(sheetInput) {
     this.originalSheetReadyText = document.getElementById('sheet-ready').innerHTML;
+    this.finishedProcessing = { 'wordCount': false, 'cellProgress': false };
+
+    this.ui.blockAllInputs(true);
+
     if (sheetInput.type === 'link') {
       document.getElementById('sheet-ready').innerHTML = 'downloading sheet...';
       const sheetsID = sheetInput.content.match(/[-\w]{25,}/);
