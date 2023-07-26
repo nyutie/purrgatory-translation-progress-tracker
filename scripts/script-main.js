@@ -1,8 +1,8 @@
 import 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js';
 
 import Ui from './script-ui.js';
-import WordCounter from "./script-countWords.js";
-import CellTracker from "./script-cellTracker.js";
+import WordCounter from './script-countWords.js';
+import CellTracker from './script-cellTracker.js';
 
 class Main {
   constructor() {
@@ -10,7 +10,7 @@ class Main {
     this.wordCounter = new WordCounter();
     this.cellTracker = new CellTracker();
     
-    this.originalSheetReadyText = "";
+    this.originalSheetReadyText = '';
   }
 
   resetSheetReadyText() {

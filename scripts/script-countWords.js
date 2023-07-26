@@ -40,7 +40,7 @@ class WordCounter {
       const wordCounts = event.data;
 
       if (wordCounts.error) {
-        outputDiv.innerHTML = "<br>" + wordCounts.error;
+        outputDiv.innerHTML = '<br>' + wordCounts.error;
         return;
       }
 

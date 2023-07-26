@@ -17,7 +17,7 @@ class CellTracker {
       const progressData = event.data;
 
       if (progressData.error) {
-        outputDiv.innerHTML = "<br>" + progressData.error;
+        outputDiv.innerHTML = '<br>' + progressData.error;
         return;
       }
 

@@ -40,7 +40,7 @@ class Ui {
           .then((title) => {
             sheetReady.innerHTML = `selected google sheet: '${title}'`;
             this.selectedSheet = {
-              type: "link",
+              type: 'link',
               content: sheetUrl
             };
             this.changeProcessSheetButton(true);
@@ -67,10 +67,10 @@ class Ui {
       if (titleMatch && titleMatch[1]) {
         let title = titleMatch[1];
         
-        // Find the last occurrence of " - " in the title
-        const lastDashIndex = title.lastIndexOf(" - ");
+        // Find the last occurrence of ' - ' in the title
+        const lastDashIndex = title.lastIndexOf(' - ');
         
-        // Remove the last " - " and anything after it
+        // Remove the last ' - ' and anything after it
         if (lastDashIndex !== -1) {
           title = title.slice(0, lastDashIndex);
         }
