@@ -22,12 +22,12 @@ class Ui {
       document.getElementById('process-sheet-button').disabled = !enable;
     }
 
-    changeProcessSheetButton(enable) {
+    enableProcessSheetButton(enable) {
       document.getElementById('process-sheet-button').disabled = !enable;
     }
 
     sheetLinkInputHandler(event) {
-      this.changeProcessSheetButton(false);
+      this.enableProcessSheetButton(false);
       const linkInput = event.target;
       const sheetUrl = linkInput.value;
       clearTimeout(this.timeoutId); // Clear the previous timeout if it exists
@@ -50,7 +50,7 @@ class Ui {
                 type: 'link',
                 content: sheetUrl
               };
-              this.changeProcessSheetButton(true);
+              this.enableProcessSheetButton(true);
             })
             .catch((error) => {
               console.error('Error fetching sheet title:', error);
@@ -113,12 +113,12 @@ class Ui {
           content: file,
         };
   
-        this.changeProcessSheetButton(true);
+        this.enableProcessSheetButton(true);
       }
     }
   
     clearFile() {
-      this.changeProcessSheetButton(false);
+      this.enableProcessSheetButton(false);
       const sheetReady = document.getElementById('sheet-ready');
       sheetReady.classList.add('hidden');
   
