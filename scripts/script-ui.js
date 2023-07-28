@@ -15,7 +15,7 @@ class Ui {
       this.sheetLinkInputHandler({ target: document.getElementById('link-input') });
     }
 
-    changeAllInputs(enable) {
+    enableAllInputs(enable) {
       document.getElementById('link-input').disabled = !enable;
       document.getElementById('upload-button').disabled = !enable;
       document.getElementById('upload-clear-button').disabled = !enable;
