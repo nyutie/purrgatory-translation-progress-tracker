@@ -31,13 +31,13 @@
           <div class="grow upload-button-group">
             <input id="file-upload-input" type="file" accept=".xls,.xlsx" style="display: none" />
             <button id="upload-button" class="upload-button" onclick="document.getElementById('file-upload-input').click()">file upload</button>
-            <button id="upload-clear-button" class="upload-clear-button" onclick="main.ui.clearFile()">×</button>
+            <button id="upload-clear-button" class="upload-clear-button" onclick="main.ui.inputs.clearFile()">×</button>
           </div>
         </div>
         <div class="divider"></div>
         <div class="process-sheets">
           <div id="sheet-ready" class="smaller-text hidden">test</div>
-          <button id="process-sheet-button" onclick="main.ui.sendSheetToMain()" disabled>process sheet</button>
+          <button id="process-sheet-button" onclick="main.ui.inputs.sendSheetToMain()" disabled>process sheet</button>
         </div>
       </div>
   

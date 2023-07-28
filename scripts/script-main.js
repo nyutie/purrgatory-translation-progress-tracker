@@ -20,7 +20,7 @@ class Main {
       this.finishedProcessing.wordCount === true &&
       this.finishedProcessing.cellProgress === true
       ) {
-        this.ui.blockAllInputs(false);
+        this.ui.inputs.changeAllInputs(true);
     }
   }
 
@@ -50,7 +50,7 @@ class Main {
     this.originalSheetReadyText = document.getElementById('sheet-ready').innerHTML;
     this.finishedProcessing = { 'wordCount': false, 'cellProgress': false };
 
-    this.ui.blockAllInputs(true);
+    this.ui.inputs.changeAllInputs(false);
 
     if (sheetInput.type === 'link') {
       document.getElementById('sheet-ready').innerHTML = 'downloading sheet...';
