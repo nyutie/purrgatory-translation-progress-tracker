@@ -135,7 +135,6 @@ a {
   width: 100%;
   min-height: 100%;
   display: flex;
-  place-items: center;
   place-content: center;
   flex-wrap: wrap;
 }
