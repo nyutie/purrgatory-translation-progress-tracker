@@ -56,8 +56,13 @@ class WordCounterWorker {
       const sheetName = cellReference.replace(/[^A-Za-z]/g, ''); // Extract sheet name from cell reference
       const cellValue = sheetsData[cellReference].v;
 
-      if (cellValue && this.knownSheets.includes(sheetName)) {
-        wordCounts[sheetName] = (wordCounts[sheetName] || 0) + this.countWordsInString(cellValue);
+      if (cellValue) {
+        if (this.knownSheets.includes(sheetName)) {
+          wordCounts[sheetName] = this.countWordsInString(cellValue);
+        }
+        else {
+          wordCounts[sheetName] = 0;
+        }
       }
     });
 
