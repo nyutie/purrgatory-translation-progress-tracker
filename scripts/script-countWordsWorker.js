@@ -53,11 +53,11 @@ class WordCounterWorker {
     const wordCounts = {};
 
     Object.keys(sheetsData).forEach((cellReference) => {
-      const sheetName = cellReference.replace(/[^A-Za-z]/g, ''); // Extract sheet name from cell reference
+      const column = cellReference.replace(/[^A-Za-z]/g, ''); // Extract sheet name from cell reference
       const cellValue = sheetsData[cellReference].v;
 
       if (cellValue) {
-        wordCounts[sheetName] = (wordCounts[sheetName] || 0) + this.countWordsInString(cellValue);
+        wordCounts[column] = (wordCounts[column] || 0) + this.countWordsInString(cellValue);
       }
     });
 
