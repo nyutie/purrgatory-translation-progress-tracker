@@ -17,6 +17,30 @@ class WordCounterWorker {
         self.postMessage({ error: 'invalid sheetInput type?? something went very wrong...' });
       }
     };
+
+    this.knownSheets = [
+      'objects',
+      'inventory',
+      'receptionist',
+      'oliver and kyungsoon intro',
+      'kyungsoon',
+      'oliver',
+      'ttt',
+      'numa',
+      'flowers',
+      'elijah',
+      'slam',
+      'poems',
+      'sean',
+      'piano',
+      'tori',
+      'natalie',
+      'ending',
+      'ending2',
+      'heaven',
+      'flashbacks',
+      'other'
+    ];
   }
 
   // Function to count words in a string
@@ -47,11 +71,16 @@ class WordCounterWorker {
     const wordCounts = {};
 
     workbook.SheetNames.forEach((sheetName) => {
-      const sheetsData = workbook.Sheets[sheetName];
-      const sheetWordCounts = this.countWordsInSheets(sheetsData);
-
-      // Sum up word counts for each sheet
-      wordCounts[sheetName] = Object.values(sheetWordCounts).reduce((acc, count) => acc + count, 0);
+      if (!this.knownSheets.includes(sheetName)) {
+        wordCounts[sheetName] = 0;
+      }
+      else {
+        const sheetsData = workbook.Sheets[sheetName];
+        const sheetWordCounts = this.countWordsInSheets(sheetsData);
+  
+        // Sum up word counts for each sheet
+        wordCounts[sheetName] = Object.values(sheetWordCounts).reduce((acc, count) => acc + count, 0);
+      }
     });
 
     // Post the word counts back to the main thread
