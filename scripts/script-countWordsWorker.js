@@ -17,30 +17,6 @@ class WordCounterWorker {
         self.postMessage({ error: 'invalid sheetInput type?? something went very wrong...' });
       }
     };
-
-    this.knownSheets = [
-      'objects',
-      'inventory',
-      'receptionist',
-      'oliver and kyungsoon intro',
-      'kyungsoon',
-      'oliver',
-      'ttt',
-      'numa',
-      'flowers',
-      'elijah',
-      'slam',
-      'poems',
-      'sean',
-      'piano',
-      'tori',
-      'natalie',
-      'ending',
-      'ending2',
-      'heaven',
-      'flashbacks',
-      'other'
-    ];
   }
 
   // Function to count words in a string
@@ -56,7 +32,7 @@ class WordCounterWorker {
       const sheetName = cellReference.replace(/[^A-Za-z]/g, ''); // Extract sheet name from cell reference
       const cellValue = sheetsData[cellReference].v;
 
-      if (cellValue && this.knownSheets.includes(sheetName)) {
+      if (cellValue) {
         wordCounts[sheetName] = (wordCounts[sheetName] || 0) + this.countWordsInString(cellValue);
       }
     });
